@@ -1,0 +1,1175 @@
+/* ==========================================================================
+   MODUL 1 PEMROGRAMAN WEB 2026 — OFFICIAL REFERENCE PROJECT
+   Tema: H. Prabowo Subianto (Presiden Republik Indonesia ke-8)
+   Arsitektur: Native HTML5 & CSS3 (Strata-Inspired Editorial Layout)
+   Teknik: Flexbox, CSS Grid, Position, Pseudo-Classes, Media Queries
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS RESET & GLOBAL VARIABLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Authentic Strata Typography (Source Sans 3 / Source Sans Pro) */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap");
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/SourceSans3-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/SourceSans3-LightItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/SourceSans3-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/SourceSans3-SemiBold.ttf') format('truetype');
+}
+
+:root {
+  --font-main: 'Source Sans 3', 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --color-bg-sidebar: #171d22;
+  --color-body-bg: #ffffff;
+  --color-text-main: #a2a2a2;
+  --color-text-dark: #494949;
+  --color-heading: #787878;
+  --color-accent: #49bf9d;
+  --color-accent-hover: #38a586;
+  --color-gold: #c59b27;
+  --color-border: #efefef;
+  --sidebar-width: 35%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-body-bg);
+  font-family: var(--font-main);
+  color: var(--color-text-main);
+  font-size: 16pt;
+  line-height: 1.75em;
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-heading);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(100, 100, 100, 0.35);
+  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+a:hover {
+  border-bottom-color: transparent;
+  color: var(--color-accent);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  color: var(--color-heading);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.45em;
+  margin-bottom: 1em;
+}
+
+h1 { font-size: 2em; line-height: 1.45em; }
+h2 { font-size: 1.5em; line-height: 1.45em; }
+h3 { font-size: 1.25em; line-height: 1.5em; }
+
+p {
+  color: #a2a2a2;
+  line-height: 1.75em;
+  margin-bottom: 2em;
+}
+
+strong, b {
+  color: #787878;
+  font-weight: 600;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+mark {
+  background-color: transparent;
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   2. BUTTONS & UI CONTROLS
+   -------------------------------------------------------------------------- */
+.button, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 4px;
+  border: 2px solid #e0e0e0;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  height: 3.2em;
+  line-height: 3.2em;
+  padding: 0 2rem;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.button:hover, .btn:hover {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  background-color: transparent;
+}
+
+.button:focus, .btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.4);
+}
+
+.button:active, .btn:active {
+  transform: scale(0.97);
+}
+
+.button.primary, .btn-primary {
+  background-color: #2e353b;
+  border-color: #2e353b;
+  color: #ffffff;
+}
+
+.button.primary:hover, .btn-primary:hover {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #ffffff !important;
+}
+
+.button.primary:focus, .btn-primary:focus {
+  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.5);
+}
+
+.btn-outline {
+  border: 2px solid #e0e0e0;
+  background-color: transparent;
+  color: #555555;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  background-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   3. FIXED LEFT SIDEBAR (#header)
+   -------------------------------------------------------------------------- */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background-color: var(--color-bg-sidebar);
+  background-image: url('../images/overlay.png'), url('../images/bg.jpg');
+  background-repeat: repeat, no-repeat;
+  background-size: auto, cover;
+  background-position: top left, center;
+  background-attachment: fixed, fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 4.5rem 3.5rem 3rem 3.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  z-index: 10;
+  text-align: right;
+}
+
+#header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 24, 27, 0.45), rgba(12, 17, 20, 0.75));
+  z-index: 1;
+}
+
+#header .inner,
+#header #footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.avatar-link {
+  display: inline-block;
+  margin-bottom: 1.75rem;
+  border: none;
+}
+
+.profile-avatar {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.avatar-link:hover .profile-avatar {
+  transform: scale(1.04);
+  border-color: var(--color-accent);
+}
+
+.sidebar-lead {
+  font-size: 1.35em;
+  line-height: 1.75em;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: -0.015em;
+  max-width: 380px;
+  text-wrap: balance;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-lead strong {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.sidebar-lead a {
+  color: inherit;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.35);
+}
+
+.sidebar-lead a:hover {
+  color: var(--color-accent);
+  border-bottom-color: transparent;
+}
+
+/* Sidebar Navigation Tabs - Diselaraskan Simetris */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.sidebar-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px; /* Lebar diselaraskan persis sama */
+  text-align: center;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 4px; /* Selaras dengan border-radius tombol di konten */
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-nav a:hover {
+  border-color: var(--color-accent);
+  color: #ffffff;
+  background: rgba(73, 191, 157, 0.15);
+}
+
+.sidebar-nav a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+/* Sidebar Footer & Socials */
+#header #footer {
+  gap: 1.25rem;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.social-icons a {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icons a:hover {
+  color: #ffffff;
+  border-color: var(--color-accent);
+  background-color: rgba(73, 191, 157, 0.25);
+  transform: translateY(-2px);
+}
+
+.copyright {
+  font-size: 0.72em;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.6em;
+  letter-spacing: 0.02em;
+}
+
+.copyright a {
+  color: rgba(255, 255, 255, 0.55);
+  border-bottom: none;
+}
+
+.copyright a:hover {
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   4. SCROLLABLE RIGHT MAIN CONTENT (#main)
+   -------------------------------------------------------------------------- */
+#main {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 5.5rem 5rem 6rem 5rem;
+  max-width: 1120px;
+}
+
+section {
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 4.5rem;
+  margin-bottom: 4.5rem;
+}
+
+section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 1.5em;
+  color: var(--color-heading);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  line-height: 1.45em;
+}
+
+/* Intro / Hero Section */
+.intro-title {
+  font-size: 2em;
+  line-height: 1.45em;
+  font-weight: 300;
+  color: var(--color-heading);
+  margin-bottom: 1.25em;
+  letter-spacing: -0.015em;
+}
+
+.intro-paragraph {
+  font-size: 1em;
+  line-height: 1.75em;
+  color: var(--color-text-main);
+  margin-bottom: 2em;
+}
+
+/* --------------------------------------------------------------------------
+   5. WORK / INITIATIVES GRID (display: grid)
+   -------------------------------------------------------------------------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.25rem 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container gambar kartu proyek (position: relative) */
+.work-thumb-link {
+  position: relative;
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.15rem;
+  background-color: #171d22;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.work-thumb-link img,
+.work-thumb-link video {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease-in-out, filter 0.3s ease;
+}
+
+/* ==========================================================================
+   PSEUDO-CLASS :hover DENGAN TOMBOL "VIEW" (Sesuai Desain Strata Asli)
+   Overlay gelap halus + Tombol View di tengah gambar muncul saat di-hover
+   ========================================================================== */
+.work-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(23, 29, 34, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 2;
+}
+
+/* Tombol "View" di tengah foto (persis seperti contoh) */
+.work-btn-view {
+  display: inline-block;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 0.45rem 1.65rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background-color: rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease-in-out;
+  transform: scale(0.92);
+}
+
+/* Efek saat gambar di-:hover */
+.work-thumb-link:hover .work-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.work-thumb-link:hover img,
+.work-thumb-link:hover video {
+  transform: scale(1.06);
+  filter: brightness(0.85);
+}
+
+.work-thumb-link:hover .work-btn-view {
+  transform: scale(1);
+}
+
+.work-btn-view:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.work-card h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 0.35em;
+  color: var(--color-text-dark);
+}
+
+.work-card h3 a {
+  color: var(--color-text-dark);
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.2s ease;
+}
+
+.work-card h3 a:hover {
+  color: var(--color-accent);
+}
+
+.work-card p {
+  font-size: 0.92em;
+  line-height: 1.65em;
+  color: #777777;
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. CONTACT & ASPIRASI FORM (CSS Grid + Flex)
+   -------------------------------------------------------------------------- */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1.6fr 1.1fr;
+  gap: 3.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-control {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+  padding: 0.85em 1em;
+  font-family: var(--font-main);
+  font-size: 0.95em;
+  color: #444444;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-control:focus {
+  border-color: var(--color-accent);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(73, 191, 157, 0.25);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Labeled Icons Contact List (Strata Authentic) */
+.labeled-icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.85rem;
+}
+
+.labeled-icons li {
+  line-height: 1.75em;
+  padding-left: 2.25em;
+  position: relative;
+  font-size: 0.95em;
+  color: #888888;
+}
+
+.labeled-icons li a {
+  color: inherit;
+  border-bottom: 1px dotted rgba(120, 120, 120, 0.4);
+}
+
+.labeled-icons li a:hover {
+  color: var(--color-accent) !important;
+  border-bottom-color: transparent;
+}
+
+.labeled-icons .labeled-icon {
+  color: #b2b2b2;
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 1.25em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   7. CV PAGE STYLES (Header, Stats, Timeline, Skills)
+   -------------------------------------------------------------------------- */
+.cv-header {
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.cv-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #555555;
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  padding: 0.3rem 0.85rem;
+  border-radius: 3px;
+  margin-bottom: 1.25rem;
+}
+
+.cv-title-row h1 {
+  font-size: 2.25rem;
+  color: var(--color-text-dark);
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+
+.cv-role {
+  font-size: 1.15rem;
+  color: #666666;
+  font-weight: 400;
+  max-width: 680px;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* Key Stats Strip (display: grid) */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fdfdfd;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 1.75rem 1rem;
+  margin-bottom: 3.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.25rem 1rem;
+  border-right: 1px solid #eeeeee;
+}
+
+.stat-item:last-child {
+  border-right: none;
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: #404040;
+  line-height: 1.15;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.stat-number .stat-unit,
+.stat-number span {
+  font-size: 1.05rem;
+  color: #777777;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #888888;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Experience & Education Timeline */
+.timeline {
+  position: relative;
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 6px;
+  width: 2px;
+  background-color: #e5e5e5;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.75rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid #b5b5b5;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.timeline-item.active .timeline-dot {
+  background-color: #383838;
+  border-color: #383838;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-period {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #666666;
+}
+
+.timeline-location {
+  font-size: 0.82rem;
+  color: #999999;
+  font-style: italic;
+}
+
+.timeline-role {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-company {
+  font-size: 0.95rem;
+  color: #666666;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  color: #777777;
+  line-height: 1.7;
+  margin-bottom: 0.85rem;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.65rem;
+  background-color: #f2f2f2;
+  color: #555555;
+  border-radius: 3px;
+}
+
+/* Skills & Methodologies Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.skill-card {
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+  padding: 1.75rem;
+  background-color: #fafafa;
+}
+
+.skill-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-bar-group {
+  margin-bottom: 1rem;
+}
+
+.progress-bar-group:last-child {
+  margin-bottom: 0;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #555555;
+  margin-bottom: 0.35rem;
+  font-weight: 400;
+}
+
+.progress-track {
+  height: 7px;
+  background-color: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4a4a4a;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.skill-card:hover .progress-fill {
+  background-color: var(--color-accent);
+}
+
+/* Publications Grid */
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.pub-card {
+  padding: 1.5rem;
+  border-left: 3px solid #dcdcdc;
+  background: #fbfbfb;
+  border-radius: 0 6px 6px 0;
+  border-top: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  transition: border-left-color 0.2s ease, transform 0.2s ease;
+}
+
+.pub-card:hover {
+  border-left-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.pub-type {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888888;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.pub-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 0.4rem;
+}
+
+.pub-venue {
+  font-size: 0.88rem;
+  color: #666666;
+  line-height: 1.55;
+}
+
+/* Bottom CTA Banner */
+.cv-cta {
+  background-color: #1f272e;
+  color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 6px;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.cv-cta-text h3 {
+  color: #ffffff;
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.cv-cta-text p {
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+.cv-cta .btn-primary {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #1f272e;
+}
+
+.cv-cta .btn-primary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   8. RESPONSIVE ADAPTATION (Media Queries)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1200px) {
+  :root {
+    --sidebar-width: 38%;
+  }
+  #main {
+    padding: 4.5rem 3.5rem;
+  }
+  #header {
+    padding: 3.5rem 2.5rem;
+  }
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  #header {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 480px;
+    text-align: center;
+    padding: 4.5rem 2rem 3rem 2rem;
+    align-items: center;
+  }
+
+  #header .inner,
+  #header #footer {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sidebar-lead {
+    max-width: 520px;
+    text-align: center;
+  }
+
+  .sidebar-nav {
+    align-items: center;
+  }
+
+  #header #footer {
+    margin-top: 2.5rem;
+  }
+
+  #main {
+    margin-left: 0;
+    width: 100%;
+    padding: 4rem 2rem;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills-grid, .pub-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 13pt;
+  }
+
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  #main {
+    padding: 3rem 1.5rem;
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   9. PRINT STYLES (@media print) — OFFICIAL BENCHMARK REFERENCE
+   Mengatur format ramah cetak saat halaman dicetak / disimpan ke PDF (Ctrl+P).
+   Materi edukasi Modul 1: Menyembunyikan elemen dekoratif & mengatur format kertas A4.
+   ========================================================================== */
+@media print {
+  /* 1. Sembunyikan elemen antarmuka layar (Sidebar, Tombol, Overlay, Formulir) */
+  #header,
+  .btn-group,
+  .social-icons,
+  .work-overlay,
+  .cv-cta,
+  .form-actions,
+  #kontak,
+  .sidebar-nav {
+    display: none !important;
+  }
+
+  /* 2. Format Body & Konten Utama agar Pas di Kertas A4 */
+  body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+
+  #main {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* 3. Header CV yang Bersih untuk Dokumen Fisik/PDF */
+  .cv-header {
+    border-bottom: 2px solid #222222;
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .cv-badge {
+    border: 1px solid #999999;
+    color: #333333;
+    background: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cv-title-row h1 {
+    font-size: 1.85rem;
+    color: #000000;
+  }
+
+  .cv-role {
+    color: #444444;
+    font-size: 10.5pt;
+  }
+
+  /* 4. Key Stats Strip Ramah Cetak */
+  .stats-strip {
+    background: #fafafa !important;
+    border: 1px solid #d0d0d0 !important;
+    padding: 1rem !important;
+    margin-bottom: 2rem !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .stat-number {
+    color: #111111;
+  }
+
+  .stat-label {
+    color: #555555;
+  }
+
+  /* 5. Mencegah Elemen Terpotong di Antara Dua Halaman (Page Break) */
+  .timeline-item,
+  .pub-card,
+  .work-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .timeline {
+    border-left: 2px solid #cccccc;
+  }
+
+  .timeline-dot {
+    background: #333333 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 6. Hilangkan Efek Tautan Layar */
+  a {
+    color: #111111 !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+  }
+}
