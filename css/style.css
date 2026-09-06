@@ -375,8 +375,7 @@ section:last-of-type {
   cursor: pointer;
 }
 
-.work-thumb-link img,
-.work-thumb-link video {
+.work-thumb-link img {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
@@ -422,8 +421,7 @@ section:last-of-type {
   visibility: visible;
 }
 
-.work-thumb-link:hover img,
-.work-thumb-link:hover video {
+.work-thumb-link:hover img {
   transform: scale(1.06);
   filter: brightness(0.85);
 }

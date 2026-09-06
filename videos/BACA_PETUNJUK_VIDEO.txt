@@ -1,1 +1,0 @@
-﻿Tempatkan file video Anda di folder ini (contoh: 01.mp4, 02.mp4, dst) dengan format MP4/WebM.
